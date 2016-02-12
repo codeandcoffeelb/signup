@@ -12,10 +12,12 @@ html {
 
 body {
     background-color: transparent;
+    color: $standard;
+    font-family: 'Open Sans', sans-serif;
 }
 
 //Our Header Card
-.headerCard {
+.formCard {
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
@@ -24,13 +26,14 @@ body {
     display: block;
     width: 90%;
     max-width: 800px;
+    background-color: $cardBg;
 
 
     //Coffe Cup Logo
     .coffeeLogo {
         font-size: 0.35em;
         background-color: transparent;
-        color: #000000;
+        color: $standard;
         display: block;
         width: 200px;
         margin-left: auto;
@@ -43,11 +46,14 @@ body {
         }
     }
 
+    //Our headers
     h1 {
         text-align: center;
+        font-weight: bold;
     }
 
     h2 {
         text-align: center;
+        font-weight: lighter;
     }
 }
