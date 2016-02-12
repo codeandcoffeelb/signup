@@ -5,6 +5,15 @@
 @import "animate";
 @import "variables";
 
+//General Styles
+html {
+    background-color: $pageBg;
+}
+
+body {
+    background-color: transparent;
+}
+
 //Our Header Card
 .headerCard {
     margin-left: auto;
@@ -15,6 +24,7 @@
     display: block;
     width: 90%;
     max-width: 800px;
+
 
     //Coffe Cup Logo
     .coffeeLogo {
@@ -29,7 +39,7 @@
         //Centered above, but the white space is acting weird
         //So center it back
         pre {
-            margin-left: -45px;
+            margin-left: -47px;
         }
     }
 
