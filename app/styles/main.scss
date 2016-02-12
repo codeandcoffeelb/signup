@@ -2,14 +2,42 @@
 // endbower
 
 //Imports
-@import "yeomanDefault";
 @import "animate";
 @import "variables";
 
-//Coffe Cup Logo
-.coffeeLogo {
-    font-size: 0.25em;
-    background-color: transparent;
-    color: #000000;
-    display: inline-block;
+//Our Header Card
+.headerCard {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    display: block;
+    width: 90%;
+    max-width: 800px;
+
+    //Coffe Cup Logo
+    .coffeeLogo {
+        font-size: 0.35em;
+        background-color: transparent;
+        color: #000000;
+        display: block;
+        width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+
+        //Centered above, but the white space is acting weird
+        //So center it back
+        pre {
+            margin-left: -45px;
+        }
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    h2 {
+        text-align: center;
+    }
 }
