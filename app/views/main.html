@@ -1,6 +1,7 @@
 
 <!-- Our main Headr card -->
-<div class = "formCard md-whiteframe-10dp animated fadeIn">
+<div class = "formCard md-whiteframe-10dp animated fadeIn"
+ng-style = "cardHeight">
 
     <!-- Coffee Cup Logo -->
     <div class = "animated slideInUp"
@@ -11,7 +12,8 @@
     <h2>Sign In!</h2>
 
     <!-- Our first form asking for name and email -->
-    <form>
+    <form
+    ng-if="formNum == 1">
 
         <!-- User first name -->
         <md-input-container class = "inputContainer md-icon-float md-block">
@@ -66,15 +68,29 @@
 
             <input type="email" ng-model="formData.email"
               class = "cardInput iconMargin"
-              ng-keydown="validateEmail()"
-              ng-keyup="validateEmail()"
+              ng-change="validateEmail()"
               autocomplete="off"  autocorrect="off"
               autocapitalize="none" spellcheck="false"
               required>
          </md-input-container>
 
           <!-- Button to submit the info -->
-
+          <div class = "center">
+              <md-button ng-click="submitSignIn(2, '722px')"
+              ng-hide="!formData.fName ||
+              formData.fName < 1 ||
+              !formData.lName ||
+              formData.lName < 1 ||
+              !formData.email ||
+              !validEmail"
+              class="formButton md-raised">
+              Log In
+              </md-button>
+          </div>
 
     </form>
+
+    <!-- Our second Form asking for opt-ins -->
+
+
 </div>

@@ -18,8 +18,14 @@ angular.module('signupApp')
 
     //Initialize our form data
     $scope.formData = {};
+    //Our current form
+    $scope.formNum = 1;
     //Variable for if we have a valid email
     $scope.validEmail = false;
+
+    //Our card height, setting it here statically
+    //So we can transition it as we change form ontent
+    $scope.cardHeight = {'height': '722px'}
 
     /**
      * Regex to Validate email field
@@ -36,6 +42,29 @@ angular.module('signupApp')
         } else {
             $scope.validEmail = false;
         }
+    }
+
+    //Function to submit the form
+    //Also passng which form to go to next
+    $scope.submitSignIn = function(nextForm, formHeight) {
+
+        //Do Some google drive stuff here
+        if(nextForm == 2);
+
+        //Do some Github and slack stuff here
+        if(nextForm == 3);
+
+        //Lastly set the form
+        //Going to set to zero
+        //Then timeout to allow for nice animations
+        $scope.formNum = 0;
+        $scope.cardHeight = {'height': '500px'}
+        $timeout(function () {
+
+            //Set the actual values
+            $scope.formNum = nextForm;
+            $scope.cardHeight = {'height': formHeight}
+        }, 750);
     }
 
 });

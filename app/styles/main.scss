@@ -33,6 +33,9 @@ body {
     display: block;
     background-color: $cardBg;
 
+    //Nice little animatio on whe the card height changes
+    transition: height 0.65s ease-in-out;
+
 
     //Coffe Cup Logo
     .coffeeLogo {
@@ -77,6 +80,7 @@ body {
         font-size: 40px !important;
         vertical-align: middle;
         display: inline-block;
+        color: $standard;
     }
 
     .cardInput {
@@ -86,4 +90,26 @@ body {
     .iconMargin {
         margin-left: 15px;
     }
+}
+
+//Our form buttons
+.center {
+
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.formButton {
+
+    text-transform: inherit;
+    padding-left: 15px;
+    padding-top: 7px;
+    padding-right: 15px;
+    padding-bottom: 7px;
+    font-size: 17px;
+
+    background-color: $standard !important;
+    color: $cardBg !important;
+
 }
