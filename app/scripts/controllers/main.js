@@ -8,7 +8,7 @@
  * Controller of the signupApp
  */
 angular.module('signupApp')
-  .controller('MainCtrl', function () {
+  .controller('MainCtrl', function ($scope) {
 
     this.awesomeThings = [
       'HTML5 Boilerplate',
