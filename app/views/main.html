@@ -8,4 +8,35 @@
 
     <h1>code + coffee / long beach</h1>
     <h2>Join us!</h2>
+
+    <!-- Our first form asking for name and email -->
+    <form>
+
+        <!-- User first name -->
+        <input type="text" ng-model="formData.fName"
+          placeholder="Code"
+          autocomplete="off"  autocorrect="off"
+          autocapitalize="none" spellcheck="false"
+          required>
+
+      <!-- User Last Name -->
+      <input type="text" ng-model="formData.lName"
+        placeholder="Coffee"
+        autocomplete="off"  autocorrect="off"
+        autocapitalize="none" spellcheck="false"
+        required>
+
+        <!-- Email field to be validated on keydown and up -->
+        <input type="email" ng-model="formData.email"
+          placeholder="example@example.com"
+          ng-keydown="validateEmail()"
+          ng-keyup="validateEmail()"
+          autocomplete="off"  autocorrect="off"
+          autocapitalize="none" spellcheck="false"
+          required>
+
+          <!-- Button to submit the info -->
+          
+
+    </form>
 </div>
