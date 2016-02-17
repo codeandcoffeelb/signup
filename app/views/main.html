@@ -14,37 +14,58 @@
     <form>
 
         <!-- User first name -->
-        <md-input-container>
-            <md-icon class="material-icons"
+        <md-input-container class = "inputContainer md-icon-float md-block">
+            <label
+            class = "iconMargin">
+            First Name
+            </label>
+
+            <md-icon class="material-icons inputIcon"
             aria-label="account_circle">
             account_circle
             </md-icon>
 
-            <label>First Name</label>
-
             <input type="text" ng-model="formData.fName"
+              class = "cardInput iconMargin"
               autocomplete="off"  autocorrect="off"
               autocapitalize="none" spellcheck="false"
               required>
          </md-input-container>
 
       <!-- User Last Name -->
-      <md-input-container>
-          <md-icon class="authIcons material-icons prefix">account_circle</md-icon>
-          <label>Last Name</label>
+      <md-input-container class = "inputContainer">
+          <label
+          class = "iconMargin">
+          Last Name
+        </label>
+
+          <md-icon class="material-icons inputIcon"
+          aria-label="account_circle">
+          account_circle
+          </md-icon>
+
+
           <input type="text" ng-model="formData.lName"
-            placeholder="Coffee"
+            class = "cardInput iconMargin"
             autocomplete="off"  autocorrect="off"
             autocapitalize="none" spellcheck="false"
             required>
        </md-input-container>
 
         <!-- Email field to be validated on keydown and up -->
-        <md-input-container class = "authInputContainer">
-            <md-icon class="authIcons material-icons prefix">account_circle</md-icon>
-            <label>E-mail</label>
+        <md-input-container class = "inputContainer">
+            <label
+            class = "iconMargin">
+            E-mail
+            </label>
+
+            <md-icon class="material-icons inputIcon"
+            aria-label="account_circle">
+            account_circle
+            </md-icon>
+
             <input type="email" ng-model="formData.email"
-              placeholder="example@example.com"
+              class = "cardInput iconMargin"
               ng-keydown="validateEmail()"
               ng-keyup="validateEmail()"
               autocomplete="off"  autocorrect="off"

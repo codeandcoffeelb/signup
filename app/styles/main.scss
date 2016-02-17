@@ -62,3 +62,28 @@ body {
         font-weight: lighter;
     }
 }
+
+//Our input styling
+.inputContainer {
+
+
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+    display: block;
+
+    .inputIcon {
+        font-size: 40px !important;
+        vertical-align: middle;
+        display: inline-block;
+    }
+
+    .cardInput {
+        width: calc(100% - 60px);
+    }
+
+    .iconMargin {
+        margin-left: 15px;
+    }
+}
