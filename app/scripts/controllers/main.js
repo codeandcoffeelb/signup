@@ -8,7 +8,7 @@
  * Controller of the signupApp
  */
 angular.module('signupApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $timeout) {
 
     this.awesomeThings = [
       'HTML5 Boilerplate',
