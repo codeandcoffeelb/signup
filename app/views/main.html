@@ -14,27 +14,43 @@
     <form>
 
         <!-- User first name -->
-        <input type="text" ng-model="formData.fName"
-          placeholder="Code"
-          autocomplete="off"  autocorrect="off"
-          autocapitalize="none" spellcheck="false"
-          required>
+        <md-input-container>
+            <md-icon class="material-icons prefix"
+            aria-label="accessibility">
+            accessibility
+            </md-icon>
+
+            <label>First Name</label>
+            
+            <input type="text" ng-model="formData.fName"
+              autocomplete="off"  autocorrect="off"
+              autocapitalize="none" spellcheck="false"
+              required>
+         </md-input-container>
 
       <!-- User Last Name -->
-      <input type="text" ng-model="formData.lName"
-        placeholder="Coffee"
-        autocomplete="off"  autocorrect="off"
-        autocapitalize="none" spellcheck="false"
-        required>
+      <md-input-container>
+          <md-icon class="authIcons material-icons prefix">account_circle</md-icon>
+          <label>Last Name</label>
+          <input type="text" ng-model="formData.lName"
+            placeholder="Coffee"
+            autocomplete="off"  autocorrect="off"
+            autocapitalize="none" spellcheck="false"
+            required>
+       </md-input-container>
 
         <!-- Email field to be validated on keydown and up -->
-        <input type="email" ng-model="formData.email"
-          placeholder="example@example.com"
-          ng-keydown="validateEmail()"
-          ng-keyup="validateEmail()"
-          autocomplete="off"  autocorrect="off"
-          autocapitalize="none" spellcheck="false"
-          required>
+        <md-input-container class = "authInputContainer">
+            <md-icon class="authIcons material-icons prefix">account_circle</md-icon>
+            <label>E-mail</label>
+            <input type="email" ng-model="formData.email"
+              placeholder="example@example.com"
+              ng-keydown="validateEmail()"
+              ng-keyup="validateEmail()"
+              autocomplete="off"  autocorrect="off"
+              autocapitalize="none" spellcheck="false"
+              required>
+         </md-input-container>
 
           <!-- Button to submit the info -->
 
