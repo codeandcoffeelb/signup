@@ -9,11 +9,15 @@ ng-style = "cardHeight">
     </div>
 
     <h1>code + coffee / long beach</h1>
-    <h2>Sign In!</h2>
 
     <!-- Our first form asking for name and email -->
     <form
     ng-if="formNum == 1">
+
+        <!-- Form Title -->
+        <h2 class = "formTitle">
+            Sign In!
+        </h2>
 
         <!-- User first name -->
         <md-input-container class = "inputContainer md-icon-float md-block">
@@ -76,7 +80,7 @@ ng-style = "cardHeight">
 
           <!-- Button to submit the info -->
           <div class = "center">
-              <md-button ng-click="submitSignIn(2, '722px')"
+              <md-button ng-click="submitSignIn(2, '675px')"
               ng-hide="!formData.fName ||
               formData.fName < 1 ||
               !formData.lName ||
@@ -91,6 +95,67 @@ ng-style = "cardHeight">
     </form>
 
     <!-- Our second Form asking for opt-ins -->
+
+    <!-- Our first form asking for name and email -->
+    <form
+    ng-if="formNum == 2">
+
+        <!-- Form Title -->
+        <h3 class = "formTitle">
+            Thank you for signing in! Would you like to join any of our online organizations?
+        </h3>
+
+        <!-- Check box for automatic org submission -->
+        <ul class = "checkList">
+
+            <li>
+                <md-checkbox ng-model="formData.slack"
+                aria-label="Checkbox 1"
+                class = "orgCheck">
+                   <a href = "https://slack.com/">
+                       Slack
+                   </a>
+                 </md-checkbox>
+            </li>
+
+            <li>
+             <md-checkbox ng-model="formData.github"
+             aria-label="Checkbox 1"
+             class = "orgCheck">
+                <a href = "https://github.com/">
+                    Github
+                </a>
+              </md-checkbox>
+            </li>
+
+         </ul>
+
+          <!-- Button to submit the info -->
+          <div class = "center">
+              <md-button ng-click="submitSignIn(3, '575px')"
+              class="formButton md-raised">
+              Submit
+              </md-button>
+          </div>
+
+    </form>
+
+    <!-- A Final Thank you -->
+    <div
+    ng-if="formNum == 3">
+
+        <h3 class = "formTitle"
+        ng-if = "formData.slack ||
+        formData.github">
+            Thank you for joining our organizations! You should be receiving an email soon with your invitation!
+        </h3>
+
+        <h3
+        class = "formTitle">
+            Welcome to Code && Coffee Long Beach, and we hope you enjoy your time!
+        </h3>
+
+    </div>
 
 
 </div>

@@ -60,7 +60,7 @@ body {
         font-weight: bold;
     }
 
-    h2 {
+    h2, h3 {
         text-align: center;
         font-weight: lighter;
     }
@@ -90,6 +90,47 @@ body {
     .iconMargin {
         margin-left: 15px;
     }
+}
+
+//Our form titles
+.formTitle {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+//Our form check list
+.checkList {
+
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    list-style: none;
+
+    .orgCheck {
+
+        &.md-checked {
+
+            .md-icon {
+
+                background-color: $checkStandard;
+            }
+        }
+
+        .md-ink-ripple {
+            color: $checkStandardRipple;
+        }
+
+        a {
+
+            color: $linkText;
+            text-decoration: underline;
+            font-size: 20px;
+            vertical-align: middle;
+        }
+
+    }
+
 }
 
 //Our form buttons
