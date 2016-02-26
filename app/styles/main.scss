@@ -16,17 +16,25 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
-//Our Header Card
-.formCard {
+//Our container for the app
+.container {
+
+    width: 90%;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+}
+
+//Our Header Card
+.formCard {
     margin-top: 15px;
     padding-bottom: 15px;
     padding-top: 15px;
     display: block;
-    width: 90%;
-    max-width: 800px;
     background-color: $cardBg;
+
+    //Nice little animatio on whe the card height changes
+    transition: height 0.65s ease-in-out;
 
 
     //Coffe Cup Logo
@@ -52,8 +60,97 @@ body {
         font-weight: bold;
     }
 
-    h2 {
+    h2, h3 {
         text-align: center;
         font-weight: lighter;
     }
+}
+
+//Our input styling
+.inputContainer {
+
+
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+    display: block;
+
+    .inputIcon {
+        font-size: 40px !important;
+        vertical-align: middle;
+        display: inline-block;
+        color: $standard;
+    }
+
+    .cardInput {
+        width: calc(100% - 60px);
+    }
+
+    .iconMargin {
+        margin-left: 15px;
+    }
+}
+
+//Our form titles
+.formTitle {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+//Our form check list
+.checkList {
+
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    list-style: none;
+
+    .orgCheck {
+
+        &.md-checked {
+
+            .md-icon {
+
+                background-color: $checkStandard;
+            }
+        }
+
+        .md-ink-ripple {
+            color: $checkStandardRipple;
+        }
+
+        a {
+
+            color: $linkText;
+            text-decoration: underline;
+            font-size: 20px;
+            vertical-align: middle;
+        }
+
+    }
+
+}
+
+//Our form buttons
+.center {
+
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.formButton {
+
+    text-transform: inherit;
+    padding-left: 15px;
+    padding-top: 7px;
+    padding-right: 15px;
+    padding-bottom: 7px;
+    font-size: 17px;
+
+    background-color: $standard !important;
+    color: $cardBg !important;
+
 }

@@ -1,11 +1,161 @@
 
 <!-- Our main Headr card -->
-<div class = "formCard md-whiteframe-10dp animated fadeIn">
+<div class = "formCard md-whiteframe-10dp animated fadeIn"
+ng-style = "cardHeight">
+
     <!-- Coffee Cup Logo -->
     <div class = "animated slideInUp"
     ng-include="'../views/coffeelogo.html'">
     </div>
 
     <h1>code + coffee / long beach</h1>
-    <h2>Join us!</h2>
+
+    <!-- Our first form asking for name and email -->
+    <form
+    ng-if="formNum == 1">
+
+        <!-- Form Title -->
+        <h2 class = "formTitle">
+            Sign In!
+        </h2>
+
+        <!-- User first name -->
+        <md-input-container class = "inputContainer md-icon-float md-block">
+            <label
+            class = "iconMargin">
+            First Name
+            </label>
+
+            <md-icon class="material-icons inputIcon"
+            aria-label="face">
+            face
+            </md-icon>
+
+            <input type="text" ng-model="formData.fName"
+              class = "cardInput iconMargin"
+              autocomplete="off"  autocorrect="off"
+              autocapitalize="none" spellcheck="false"
+              required>
+         </md-input-container>
+
+      <!-- User Last Name -->
+      <md-input-container class = "inputContainer">
+          <label
+          class = "iconMargin">
+          Last Name
+        </label>
+
+          <md-icon class="material-icons inputIcon"
+          aria-label="account_circle">
+          account_circle
+          </md-icon>
+
+
+          <input type="text" ng-model="formData.lName"
+            class = "cardInput iconMargin"
+            autocomplete="off"  autocorrect="off"
+            autocapitalize="none" spellcheck="false"
+            required>
+       </md-input-container>
+
+        <!-- Email field to be validated on keydown and up -->
+        <md-input-container class = "inputContainer">
+            <label
+            class = "iconMargin">
+            E-mail
+            </label>
+
+            <md-icon class="material-icons inputIcon"
+            aria-label="mail_outline">
+            mail_outline
+            </md-icon>
+
+            <input type="email" ng-model="formData.email"
+              class = "cardInput iconMargin"
+              ng-change="validateEmail()"
+              autocomplete="off"  autocorrect="off"
+              autocapitalize="none" spellcheck="false"
+              required>
+         </md-input-container>
+
+          <!-- Button to submit the info -->
+          <div class = "center">
+              <md-button ng-click="submitSignIn(2, '675px')"
+              ng-hide="!formData.fName ||
+              formData.fName < 1 ||
+              !formData.lName ||
+              formData.lName < 1 ||
+              !formData.email ||
+              !validEmail"
+              class="formButton md-raised">
+              Log In
+              </md-button>
+          </div>
+
+    </form>
+
+    <!-- Our second Form asking for opt-ins -->
+
+    <!-- Our first form asking for name and email -->
+    <form
+    ng-if="formNum == 2">
+
+        <!-- Form Title -->
+        <h3 class = "formTitle">
+            Thank you for signing in! Would you like to join any of our online organizations?
+        </h3>
+
+        <!-- Check box for automatic org submission -->
+        <ul class = "checkList">
+
+            <li>
+                <md-checkbox ng-model="formData.slack"
+                aria-label="Checkbox 1"
+                class = "orgCheck">
+                   <a href = "https://slack.com/">
+                       Slack
+                   </a>
+                 </md-checkbox>
+            </li>
+
+            <li>
+             <md-checkbox ng-model="formData.github"
+             aria-label="Checkbox 1"
+             class = "orgCheck">
+                <a href = "https://github.com/">
+                    Github
+                </a>
+              </md-checkbox>
+            </li>
+
+         </ul>
+
+          <!-- Button to submit the info -->
+          <div class = "center">
+              <md-button ng-click="submitSignIn(3, '575px')"
+              class="formButton md-raised">
+              Submit
+              </md-button>
+          </div>
+
+    </form>
+
+    <!-- A Final Thank you -->
+    <div
+    ng-if="formNum == 3">
+
+        <h3 class = "formTitle"
+        ng-if = "formData.slack ||
+        formData.github">
+            Thank you for joining our organizations! You should be receiving an email soon with your invitation!
+        </h3>
+
+        <h3
+        class = "formTitle">
+            Welcome to Code &amp;&amp; Coffee Long Beach, and we hope you enjoy your time!
+        </h3>
+
+    </div>
+
+
 </div>

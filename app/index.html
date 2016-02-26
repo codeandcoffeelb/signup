@@ -14,6 +14,9 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+
+    <!-- Google Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
 
   <body ng-app="signupApp">
@@ -23,9 +26,18 @@
 
     <!-- Add your site or application content here -->
     <div class="container">
-    <div ng-view=""></div>
-    </div>
 
+        <div ng-view=""></div>
+
+        <!-- Footer -->
+        <footer
+        ng-controller="FooterCtrl"
+        ng-show = "showFooter"
+        class = "animated fadeIn">
+            <h5>Icons provided by <a href="http://google.github.io/material-design-icons/">Google Material Icons</a></h5>
+        </footer>
+
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -46,7 +58,6 @@
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
@@ -57,6 +68,7 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/footer.js"></script>
         <!-- endbuild -->
 </body>
 </html>
