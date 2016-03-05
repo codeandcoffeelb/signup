@@ -58,7 +58,8 @@ if (app.get('env') === 'development') {
 var keys = JSON.parse(fs.readFileSync('keys.json', 'utf8'));
 
 //Check if ifttt key is blank, inform deployer
-if(!keys.ifftKey) {
+if(!keys.ifftKey ||
+    !keys.slackKey) {
         console.log("\nHello! Seems like you forgot to add the ifttt key! insert it into the variable 'iftttKey' in the keys.json, located in backend/keys.json\n");
 }
 

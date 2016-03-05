@@ -14,27 +14,29 @@ router.get('/', function(req, res, next) {
 });
 
 //Post to ifttt, google sheets
-router.post('/sheets', function(req, res, next) {
+router.post('/signup', function(req, res, next) {
 
     //Prepare our object
     //Value 1 = Atendee name
     //Value 2 = Atendee email
     //Value 3 = Atendee Org Opt-in
     var iftttPayload = {
-        "value1": req.body.name,
+        "value1": req.body.firstname + " " + req.body.lastname,
         "value2": req.body.email,
         "value3": req.body.orgs
     }
 
     //Make the request
     request.post(
-        'https://maker.ifttt.com/trigger/sheets/with/key/' + iftttKey,
+        'https://maker.ifttt.com/trigger/sheets/with/key/' + keys.iftttKey,
         { form: iftttPayload },
         function (error, response, body) {
+            console.log(response);
+            console.log(error);
             if (!error && response.statusCode == 200) {
                 res.send(200).json({
-                    msg: "Success! :)"
-                });;
+                    msg: "Success! :D"
+                });
             }
             else {
                 res.status(error.status).json({
@@ -43,6 +45,43 @@ router.post('/sheets', function(req, res, next) {
             }
         }
     );
+
+    //Now make org requests
+    //Slack
+
+    if(req.body.slack) {
+
+        //Create our slack payloadd
+        var slackPayload = {
+            "email": req.body.email,
+            "channels": "general",
+            "first_name": req.body.firstname,
+            "token": keys.slackKey,
+            "_attempts": 1
+        };
+
+        //Need to add the api url, as well as a EPOCH, unix time
+        //Hence the date math in the query param
+        request.post(
+            "https://codeandcoffee.slack.com/api/users.admin.invite?t=" + Math.floor((new Date).getTime() / 1000),
+            { form: iftttPayload },
+            function (error, response, body) {
+                console.log(response);
+                console.log(error);
+                if (!error && response.statusCode == 200) {
+                    res.send(200).json({
+                        msg: "Success! :D"
+                    });
+                }
+                else {
+                    res.status(error.status).json({
+                        msg: "An error has occured."
+                    });
+                }
+            }
+        );
+    }
+
 });
 
 module.exports = router;
