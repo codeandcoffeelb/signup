@@ -83,29 +83,45 @@ router.post('/slack', function(req, res, next) {
 //Post to github
 router.post('/github', function(req, res, next) {
 
-    //Create our github basic auth
-    var username = keys.githubUsername;
-    token = keys.githubToken;
-    url = 'http://' + username + ':' + token + '@https://api.github.com/orgs/codeandcoffeelb/memberships/' + req.body.githubUsername;
-
-    //Create our github payload
+    //Our payload
     var githubPayload = {
         "role": "member"
-    };
+    }
 
-    request.put(
-        "https://api.github.com/orgs/codeandcoffeelb/memberships/" + req.body.githubUsername,
+    //Set up some headers for githubU user agent string
+    //requests using baseRequest() will set the 'x-token' header
+    var agentRequest = request.defaults({
+      headers: {'User-Agent': 'CodeandCoffeeBotBeepBoop'}
+    });
+
+    agentRequest.put(
+        "https://api.github.com/orgs/TestOrggy/memberships/" + req.body.githubUsername,
         {
-            form: githubPayload,
-            url: githubAuth
+            json: true,
+            body: githubPayload,
+            auth: {
+                "user": keys.githubUsername,
+                "pass": keys.githubToken
+            }
         },
         function (error, response, body) {
+            console.log(response);
             if (!error && response.statusCode == 200) {
 
-                //Sucess!
+                //Success!
+                res.send(200);
+            }
+            else {
+
+                //Error
+                res.json({
+                    "status": response.statusCode,
+                    "message": response.body.message
+                });
             }
         }
     );
+
 });
 
 module.exports = router;
