@@ -10,6 +10,9 @@ var users = require('./routes/users');
 
 var app = express();
 
+//Read our keys.json file
+var fs = require("fs");
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -52,12 +55,11 @@ if (app.get('env') === 'development') {
     KEYS
     Set these before serving
 ****************/
-var ifftKey = "";
+var keys = JSON.parse(fs.readFileSync('keys.json', 'utf8'));
 
-//Check if key is blank, inform deployer
-
-if(ifftKey == "") {
-        console.log("\nHello! Seems like you forgot to add the ifttt key! insert it into the variable 'iftttKey' in the app.js, located in backend/app.js\n");
+//Check if ifttt key is blank, inform deployer
+if(!keys.ifftKey) {
+        console.log("\nHello! Seems like you forgot to add the ifttt key! insert it into the variable 'iftttKey' in the keys.json, located in backend/keys.json\n");
 }
 
 
