@@ -49,18 +49,15 @@ if (app.get('env') === 'development') {
   });
 }
 
-
-
-/****************
-    KEYS
-    Set these before serving
-****************/
-var keys = JSON.parse(fs.readFileSync('keys.json', 'utf8'));
+//Parse our keys.json
+keys = JSON.parse(fs.readFileSync('keys.json', 'utf8'));
 
 //Check if ifttt key is blank, inform deployer
-if(!keys.ifftKey ||
-    !keys.slackKey) {
-        console.log("\nHello! Seems like you forgot to add the ifttt key! insert it into the variable 'iftttKey' in the keys.json, located in backend/keys.json\n");
+if(!keys.iftttKey ||
+    !keys.slackKey ||
+    !keys.githubUsername ||
+    !keys.githubToken) {
+        console.log("\nHello! Seems like you forgot to add some keys! Insert keys into the keys.json, located in backend/keys.json\n");
 }
 
 

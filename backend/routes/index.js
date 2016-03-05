@@ -4,9 +4,11 @@ var router = express.Router();
 //Using request for super simple api requests
 var request = require('request');
 
-//Our api key
-//Do not add this until build
-var iftttKey = "";
+//Read our keys.json file
+var fs = require("fs");
+
+//Parse our keys.json
+keys = JSON.parse(fs.readFileSync('keys.json', 'utf8'));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -65,6 +67,47 @@ router.post('/signup', function(req, res, next) {
         request.post(
             "https://codeandcoffee.slack.com/api/users.admin.invite?t=" + Math.floor((new Date).getTime() / 1000),
             { form: iftttPayload },
+            function (error, response, body) {
+                console.log(response);
+                console.log(error);
+                if (!error && response.statusCode == 200) {
+                    res.send(200).json({
+                        msg: "Success! :D"
+                    });
+                }
+                else {
+                    res.status(error.status).json({
+                        msg: "An error has occured."
+                    });
+                }
+            }
+        );
+    }
+
+
+
+    //Github
+
+    //First authenticate whichever admin
+    //hosted the backend
+    if(req.body.github) {
+
+        //Create our github basic auth
+        var username = keys.githubUsername;
+        token = keys.githubToken;
+        url = 'http://' + username + ':' + token + '@https://api.github.com/orgs/codeandcoffeelb/memberships/' + req.body.githubUsername;
+
+        //Create our github payload
+        var githubPayload = {
+            "role": "member"
+        };
+
+        request.put(
+            "https://api.github.com/orgs/codeandcoffeelb/memberships/" + req.body.githubUsername,
+            {
+                form: iftttPayload,
+                url: githubAuth
+            },
             function (error, response, body) {
                 console.log(response);
                 console.log(error);
