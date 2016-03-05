@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-//Post to ifttt
+//Post to ifttt, google sheets
 router.post('/sheets', function(req, res, next) {
 
     //Prepare our object
@@ -32,7 +32,14 @@ router.post('/sheets', function(req, res, next) {
         { form: iftttPayload },
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
-                console.log(body);
+                res.send(200).json({
+                    msg: "Success! :)"
+                });;
+            }
+            else {
+                res.status(error.status).json({
+                    msg: "An error has occured."
+                });
             }
         }
     );
