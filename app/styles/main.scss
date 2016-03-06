@@ -70,7 +70,7 @@ body {
 .inputContainer {
 
 
-    width: 85%;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 10px;
@@ -90,6 +90,29 @@ body {
     .iconMargin {
         margin-left: 15px;
     }
+}
+
+//Our absolute position inputs near checkboxes
+.relativeContainer {
+
+    position: relative;
+    display: inline-block;
+    height: 75px;
+    width: 60%;
+    vertical-align: middle;
+
+    .inputContainerInline {
+
+        @extend .inputContainer;
+        position: absolute;
+
+        top: -2px;
+    }
+}
+
+//Margin top for the slack checkbox
+#slackCheck {
+    margin-top: 40px;
 }
 
 //Our form titles
