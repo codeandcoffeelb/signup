@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 });
 
 //Post to ifttt, google sheets
-router.post('/signup', function(req, res, next) {
+router.post('/ifttt', function(req, res, next) {
 
     //Prepare our object
     //Value 1 = Atendee name
@@ -33,11 +33,26 @@ router.post('/signup', function(req, res, next) {
         'https://maker.ifttt.com/trigger/sheets/with/key/' + keys.iftttKey,
         { form: iftttPayload },
         function (error, response, body) {
-            if (!error && response.statusCode == 200) {
 
-                //Sucess!
-                //Request response for us here?
+            //Get the ifttt message/error
+            var iftttMessage;
+
+            //Check if if it is json by trying to parse it
+            try {
+
+                //Parse the error
+                JSON.parse(response.body);
+                iftttMessage = JSON.parse(response.body).errors
             }
+            catch(e) {
+                iftttMessage = response.body
+            }
+
+            //Return the response
+            res.json({
+                "iftttStatus": response.statusCode,
+                "iftttMessage": iftttMessage
+            });
         }
     );
 });
