@@ -65,17 +65,23 @@ router.post('/slack', function(req, res, next) {
         "https://codeandcoffee.slack.com/api/users.admin.invite?t=" + Math.floor((new Date).getTime() / 1000),
         { form: slackPayload },
         function (error, response, body) {
-            console.log(response);
-            if (!error && response.statusCode == 200) {
 
-                //Success!
-                res.send(200);
-            }
-            else {
+            //Parse the json returned from slack
+            var slackRes = JSON.parse(response.body);
 
-                //Error
-                res.send(response.statusCode);
-            }
+            //Get a status code
+            var slackStatus;
+            if(slackRes.ok ||
+                slackRes.error == "already_invited" ||
+                slackRes.error == "already_invited") slackStatus = 200;
+            else slackStatus = 409;
+
+            //Return it to the frontend
+            res.json({
+                "slackStatus": slackStatus,
+                "slackOk": slackRes.ok,
+                "slackMessage": slackRes.error
+            });
         }
     );
 });
@@ -95,7 +101,7 @@ router.post('/github', function(req, res, next) {
     });
 
     agentRequest.put(
-        "https://api.github.com/orgs/TestOrggy/memberships/" + req.body.githubUsername,
+        "https://api.github.com/orgs/codeandcoffeelb/memberships/" + req.body.githubUsername,
         {
             json: true,
             body: githubPayload,
