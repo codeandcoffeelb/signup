@@ -129,8 +129,8 @@ router.post('/github', function(req, res, next) {
 
             //Send our response
             res.json({
-                "gitStatus": response.message.statusCode,
-                "gitMessage": response.message.body.message
+                "gitStatus": response.statusCode,
+                "gitMessage": response.body.message
             });
         }
     );
