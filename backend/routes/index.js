@@ -126,20 +126,12 @@ router.post('/github', function(req, res, next) {
             }
         },
         function (error, response, body) {
-            console.log(response);
-            if (!error && response.statusCode == 200) {
 
-                //Success!
-                res.send(200);
-            }
-            else {
-
-                //Error
-                res.json({
-                    "status": response.statusCode,
-                    "message": response.body.message
-                });
-            }
+            //Send our response
+            res.json({
+                "gitStatus": response.message.statusCode,
+                "gitMessage": response.message.body.message
+            });
         }
     );
 
