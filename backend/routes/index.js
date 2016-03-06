@@ -18,6 +18,17 @@ router.get('/', function(req, res, next) {
 //Post to ifttt, google sheets
 router.post('/ifttt', function(req, res, next) {
 
+    //First check for keys
+    if(!keys.iftttKey) {
+
+        //Return an empty keys response
+        res.json({
+            "iftttStatus": 500,
+            "iftttMessage": "Keys not found!"
+        });
+        return;
+    }
+
     //Prepare our object
     //Value 1 = Atendee name
     //Value 2 = Atendee email

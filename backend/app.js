@@ -13,6 +13,10 @@ var app = express();
 //Read our keys.json file
 var fs = require("fs");
 
+//cors, cross origin requests
+var cors = require('cors');
+app.use(cors());
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -57,10 +61,9 @@ if(!keys.iftttKey ||
     !keys.slackKey ||
     !keys.githubUsername ||
     !keys.githubToken) {
+
         console.log("\nHello! Seems like you forgot to add some keys! Insert keys into the keys.json, located in backend/keys.json\n");
-
         console.log("\nkeys.json should be similar as shown below:\n\n");
-
         console.log(JSON.stringify({
             "iftttKey" : "",
             "slackKey": "",

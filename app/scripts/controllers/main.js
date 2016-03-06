@@ -8,7 +8,7 @@
  * Controller of the signupApp
  */
 angular.module('signupApp')
-  .controller('MainCtrl', function ($scope, $timeout) {
+  .controller('MainCtrl', function ($scope, $timeout, CCNode) {
 
     this.awesomeThings = [
       'HTML5 Boilerplate',
@@ -49,7 +49,25 @@ angular.module('signupApp')
     $scope.submitSignIn = function(nextForm, formHeight) {
 
         //Do Some google drive stuff here
-        if(nextForm == 2);
+        if(nextForm == 2) {
+
+            //Prepare our payload
+            var payload = {
+                api: "ifttt",
+                value1: $scope.formData.fName + $scope.formData.lName + "",
+                value2: $scope.formData.email,
+                value3: " "
+            }
+
+            //Post to CCnode
+            CCNode.post(payload, function(response) {
+                console.log(response);
+            },
+            //Error
+            function(error) {
+                console.log(error);
+            });
+        }
 
         //Do some Github and slack stuff here
         if(nextForm == 3);
@@ -59,11 +77,14 @@ angular.module('signupApp')
         //Then timeout to allow for nice animations
         $scope.formNum = 0;
         $scope.cardHeight = {'height': '500px'}
+        $scope.formNum = nextForm;
         $timeout(function () {
 
             //Set the actual values
             $scope.formNum = nextForm;
-            $scope.cardHeight = {'height': formHeight}
+            $scope.cardHeight = {
+                'height': (document.getElementById('formTwo').clientHeight + 500) + "px"
+            };
         }, 750);
     }
 
