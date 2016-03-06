@@ -58,6 +58,15 @@ if(!keys.iftttKey ||
     !keys.githubUsername ||
     !keys.githubToken) {
         console.log("\nHello! Seems like you forgot to add some keys! Insert keys into the keys.json, located in backend/keys.json\n");
+
+        console.log("\nkeys.json should be similar as shown below:\n\n");
+
+        console.log(JSON.stringify({
+            "iftttKey" : "",
+            "slackKey": "",
+            "githubUsername": "",
+            "githubToken": ""
+        }));
 }
 
 
