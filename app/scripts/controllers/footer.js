@@ -21,6 +21,6 @@ angular.module('signupApp')
 
     $timeout(function () {
         $scope.showFooter = true;
-    }, 1000);
+    }, 1500);
 
   });

@@ -24,8 +24,20 @@ angular.module('signupApp')
     $scope.validEmail = false;
 
     //Our card height, setting it here statically
-    //So we can transition it as we change form ontent
-    $scope.cardHeight = {'height': '722px'}
+    //So we can transition it as we change form content
+    //Timeout to make sure the dom is loaded before calculating
+    var CCHeaderHeight;
+    $timeout(function () {
+
+        //Save the card header height
+        //+ a little padding for smaller devices
+        CCHeaderHeight = document.getElementById('CCHeader').clientHeight + 63;
+
+        //+50px for the hidden button
+        $scope.cardHeight = {
+            'height': (document.getElementById('form1').clientHeight + CCHeaderHeight + 50) + "px"
+        };
+    }, 10);
 
     /**
      * Regex to Validate email field
@@ -46,9 +58,9 @@ angular.module('signupApp')
 
     //Function to submit the form
     //Also passng which form to go to next
-    $scope.submitSignIn = function(nextForm, formHeight) {
+    $scope.submitSignIn = function(nextForm) {
 
-        //Do Some google drive stuff here
+        //Send our requests here
         if(nextForm == 2) {
 
             //Prepare our payload
@@ -69,22 +81,24 @@ angular.module('signupApp')
             });
         }
 
-        //Do some Github and slack stuff here
-        if(nextForm == 3);
-
-        //Lastly set the form
+        //Lastly set the form height
         //Going to set to zero
         //Then timeout to allow for nice animations
         $scope.formNum = 0;
-        $scope.cardHeight = {'height': '500px'}
-        $scope.formNum = nextForm;
+        $scope.cardHeight = {'height': CCHeaderHeight + 'px'}
         $timeout(function () {
 
             //Set the actual values
             $scope.formNum = nextForm;
+
+            //Apply scope here to make the dom change
+            $scope.$apply();
+
+            //Now set the new height
             $scope.cardHeight = {
-                'height': (document.getElementById('formTwo').clientHeight + 500) + "px"
+                'height': (document.getElementById('form' + $scope.formNum).clientHeight + CCHeaderHeight) + "px",
             };
+
         }, 750);
     }
 

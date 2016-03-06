@@ -4,15 +4,17 @@
 ng-style = "cardHeight">
 
     <!-- Coffee Cup Logo -->
-    <div class = "animated slideInUp"
-    ng-include="'../views/coffeelogo.html'">
-    </div>
+    <div id = "CCHeader">
+        <div class = "animated slideInUp"
+        ng-include="'../views/coffeelogo.html'">
+        </div>
 
-    <h1>code + coffee / long beach</h1>
+        <h1>code + coffee / long beach</h1>
+    </div>
 
     <!-- Our first form asking for name and email -->
     <form
-    id = "formOne"
+    id = "form1"
     ng-if="formNum == 1">
 
         <!-- Form Title -->
@@ -81,7 +83,7 @@ ng-style = "cardHeight">
 
           <!-- Button to submit the info -->
           <div class = "center">
-              <md-button ng-click="submitSignIn(2, '675px')"
+              <md-button ng-click="submitSignIn(2)"
               ng-hide="!formData.fName ||
               formData.fName < 1 ||
               !formData.lName ||
@@ -99,7 +101,7 @@ ng-style = "cardHeight">
 
     <!-- Our first form asking for name and email -->
     <form
-    id = "formTwo"
+    id = "form2"
     ng-if="formNum == 2">
 
         <!-- Form Title -->
@@ -134,7 +136,7 @@ ng-style = "cardHeight">
 
           <!-- Button to submit the info -->
           <div class = "center">
-              <md-button ng-click="submitSignIn(3, '575px')"
+              <md-button ng-click="submitSignIn(3)"
               class="formButton md-raised">
               Submit
               </md-button>
@@ -144,7 +146,7 @@ ng-style = "cardHeight">
 
     <!-- A Final Thank you -->
     <div
-    id = "formThree"
+    id = "form3"
     ng-if="formNum == 3">
 
         <h3 class = "formTitle"
