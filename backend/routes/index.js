@@ -22,9 +22,9 @@ router.post('/ifttt', function(req, res, next) {
     if(!keys.iftttKey) {
 
         //Return an empty keys response
-        res.json({
-            "iftttStatus": 500,
-            "iftttMessage": "Keys not found!"
+        res.status(500).json({
+            "status": 500,
+            "message": "ifttt keys not found!"
         });
         return;
     }
@@ -60,9 +60,9 @@ router.post('/ifttt', function(req, res, next) {
             }
 
             //Return the response
-            res.json({
-                "iftttStatus": response.statusCode,
-                "iftttMessage": iftttMessage
+            res.status(response.statusCode).json({
+                "status": response.statusCode,
+                "message": iftttMessage
             });
         }
     );
@@ -70,6 +70,17 @@ router.post('/ifttt', function(req, res, next) {
 
 //Post to slack
 router.post('/slack', function(req, res, next) {
+
+    //First check for keys
+    if(!keys.slackKey) {
+
+        //Return an empty keys response
+        res.status(500).json({
+            "status": 500,
+            "message": "Slack keys not found!"
+        });
+        return;
+    }
 
     //Create our string of channels id's
     //can be retrieved from https://api.slack.com/methods/channels.list/test
@@ -103,10 +114,10 @@ router.post('/slack', function(req, res, next) {
             else slackStatus = 409;
 
             //Return it to the frontend
-            res.json({
-                "slackStatus": slackStatus,
+            res.status(slackStatus).json({
+                "status": slackStatus,
                 "slackOk": slackRes.ok,
-                "slackMessage": slackRes.error
+                "message": slackRes.error
             });
         }
     );
@@ -114,6 +125,18 @@ router.post('/slack', function(req, res, next) {
 
 //Post to github
 router.post('/github', function(req, res, next) {
+
+    //First check for keys
+    if(!keys.githubUsername ||
+        !keys.githubToken) {
+
+        //Return an empty keys response
+        res.status(500).json({
+            "status": 500,
+            "message": "Github keys not found!"
+        });
+        return;
+    }
 
     //Our payload
     var githubPayload = {
@@ -139,9 +162,9 @@ router.post('/github', function(req, res, next) {
         function (error, response, body) {
 
             //Send our response
-            res.json({
-                "gitStatus": response.statusCode,
-                "gitMessage": response.body.message
+            res.status(response.statusCode).json({
+                "status": response.statusCode,
+                "message": response.body.message
             });
         }
     );

@@ -23,6 +23,9 @@ angular.module('signupApp')
     //Variable for if we have a valid email
     $scope.validEmail = false;
 
+    //initialize our error stack
+    $scope.errors = [];
+
     //Our card height, setting it here statically
     //So we can transition it as we change form content
     //Timeout to make sure the dom is loaded before calculating
@@ -60,32 +63,85 @@ angular.module('signupApp')
     //Also passng which form to go to next
     $scope.submitSignIn = function(nextForm) {
 
-        //Send our requests here
-        if(nextForm == 2) {
+        //Going to set form to zero for loading
+        $scope.formNum = 0;
+        //And set the height to the spinner height
+        $scope.cardHeight = {'height': CCHeaderHeight + 'px'}
 
-            //Prepare our payload
-            var payload = {
-                api: "ifttt",
-                value1: $scope.formData.fName + $scope.formData.lName + "",
-                value2: $scope.formData.email,
-                value3: " "
+        //Send our requests here
+        //Prepare our ifttt payload
+        var iftttPayload = {
+            api: "ifttt",
+            value1: $scope.formData.fName + $scope.formData.lName + "",
+            value2: $scope.formData.email,
+            value3: " "
+        };
+
+        //Post to ifttt
+        CCNode.post(iftttPayload, function(response) {
+
+            //Prepare our slack payload
+            var slackPayload = {
+                api: "slack",
+                email: $scope.formData.email,
+                first_name: $scope.formData.fName
             }
 
-            //Post to CCnode
-            CCNode.post(payload, function(response) {
-                console.log(response);
+            //post to slack
+            CCNode.post(slackPayload, function(response) {
+
+                //Finally, prepare the github payload
+                var githubPayload  ={
+                    api: "github",
+                    githubUsername: $scope.formData.githubUsername
+                }
+
+                CCNode.post(githubPayload, function(response) {
+
+                    console.log("Success!");
+
+                    //Do a short timeout
+                    $timeout(function () {
+
+                        //Set the actual values
+                        $scope.formNum = nextForm;
+
+                        //Apply scope here to make the dom change
+                        $scope.$apply();
+
+                        //Now set the new height
+                        $scope.cardHeight = {
+                            'height': (document.getElementById('form' + $scope.formNum).clientHeight + CCHeaderHeight) + "px",
+                        };
+
+                    }, 250);
+
+                },
+                //Error
+                function(error) {
+
+                    //Add the error to the error stack
+                    $scope.errors.push("Error " + error.status + ": " + error.data.message);
+                })
             },
             //Error
             function(error) {
-                console.log(error);
-            });
-        }
 
-        //Lastly set the form height
-        //Going to set to zero
-        //Then timeout to allow for nice animations
-        $scope.formNum = 0;
-        $scope.cardHeight = {'height': CCHeaderHeight + 'px'}
+                //Add the error to the error stack
+                $scope.errors.push("Error " + error.status + ": " + error.data.message);
+            })
+        },
+        //Error
+        function(error) {
+
+            //Add the error to the error stack
+            $scope.errors.push("Error " + error.status + ": " + error.data.message);
+        });
+
+
+
+        //Placing form height change here since we are still testing things out
+        //Do a short timeout
         $timeout(function () {
 
             //Set the actual values
@@ -99,7 +155,7 @@ angular.module('signupApp')
                 'height': (document.getElementById('form' + $scope.formNum).clientHeight + CCHeaderHeight) + "px",
             };
 
-        }, 750);
+        }, 250);
     }
 
 });
