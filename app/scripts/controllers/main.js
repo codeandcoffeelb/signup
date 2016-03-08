@@ -30,6 +30,9 @@ angular.module('signupApp')
     //So we can transition it as we change form content
     //Timeout to make sure the dom is loaded before calculating
     var CCHeaderHeight;
+    $scope.cardHeight = {
+        'height': '1400px'
+    }
     $timeout(function () {
 
         //Save the card header height
@@ -40,7 +43,7 @@ angular.module('signupApp')
         $scope.cardHeight = {
             'height': (document.getElementById('form1').clientHeight + CCHeaderHeight + 50) + "px"
         };
-    }, 10);
+    }, 500);
 
     /**
      * Regex to Validate email field

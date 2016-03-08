@@ -36,10 +36,24 @@ body {
     //Nice little animatio on whe the card height changes
     transition: height 0.65s ease-in-out;
 
+    //Coffee Cup logo Image
+    .coffeeLogoImage {
+
+        margin-left: auto;
+        margin-right: auto;
+
+        img {
+            width: 80%;
+            z-index: 1;
+            display: block;
+            margin: auto;
+        }
+    }
+
 
     //Coffe Cup Logo
-    .coffeeLogo {
-        font-size: 0.35em;
+    .coffeeLogoText {
+        font-size: 16px;
         background-color: transparent;
         color: $standard;
         display: block;
@@ -50,7 +64,7 @@ body {
         //Centered above, but the white space is acting weird
         //So center it back
         pre {
-            margin-left: -47px;
+            margin-left: -300px;
         }
     }
 
