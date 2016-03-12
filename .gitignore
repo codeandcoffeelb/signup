@@ -3,3 +3,5 @@
 /.tmp
 /.sass-cache
 /bower_components
+/backend/node_modules
+/backend/keys.json

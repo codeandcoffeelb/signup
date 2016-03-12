@@ -4,14 +4,23 @@
 ng-style = "cardHeight">
 
     <!-- Coffee Cup Logo -->
-    <div class = "animated slideInUp"
-    ng-include="'../views/coffeelogo.html'">
-    </div>
+    <div id = "CCHeader">
+        <!--
+        Going with coffee cup image instead
+        <div class = "animated slideInUp"
+        ng-include="'../views/coffeelogo.html'">
+        </div> -->
 
-    <h1>code + coffee / long beach</h1>
+        <div class = "animated slideInUp coffeeLogoImage">
+            <img src = "../images/coffeelogoTransparent.png">
+        </div>
+
+        <h1>code + coffee / long beach</h1>
+    </div>
 
     <!-- Our first form asking for name and email -->
     <form
+    id = "form1"
     ng-if="formNum == 1">
 
         <!-- Form Title -->
@@ -78,15 +87,69 @@ ng-style = "cardHeight">
               required>
          </md-input-container>
 
+         <!-- Orgs Title -->
+         <h3 class = "formTitle">
+             Would you like to join any of our online organizations?
+         </h3>
+
+         <!-- Check box for automatic org submission -->
+         <ul class = "checkList">
+
+             <li id="slackCheck">
+                 <md-checkbox ng-model="formData.slack"
+                 aria-label="Checkbox 1"
+                 class = "orgCheck">
+                    <a href = "https://slack.com/">
+                        Slack
+                    </a>
+                  </md-checkbox>
+             </li>
+
+             <li>
+              <md-checkbox ng-model="formData.github"
+              aria-label="Checkbox 1"
+              class = "orgCheck">
+                 <a href = "https://github.com/">
+                     Github
+                 </a>
+               </md-checkbox>
+
+               <!--If github clicked ask for username -->
+               <div class = "relativeContainer">
+                   <md-input-container ng-if = "formData.github"
+                   class = "inputContainerInline">
+
+                       <label
+                       class = "iconMargin">
+                       Github Username
+                       </label>
+
+                       <input type="text" ng-model="formData.githubUsername"
+                         class = "cardInput iconMargin"
+                         autocomplete="off"  autocorrect="off"
+                         autocapitalize="none" spellcheck="false"
+                         required>
+                    </md-input-container>
+                </div>
+
+             </li>
+
+          </ul>
+
+
           <!-- Button to submit the info -->
           <div class = "center">
-              <md-button ng-click="submitSignIn(2, '675px')"
+              <md-button ng-click="submitSignIn(2)"
               ng-hide="!formData.fName ||
               formData.fName < 1 ||
               !formData.lName ||
               formData.lName < 1 ||
               !formData.email ||
-              !validEmail"
+              !validEmail ||
+
+              (formData.github &&
+              (!formData.githubUsername ||
+              formData.githubUsername < 1))"
               class="formButton md-raised">
               Log In
               </md-button>
@@ -94,55 +157,10 @@ ng-style = "cardHeight">
 
     </form>
 
-    <!-- Our second Form asking for opt-ins -->
-
-    <!-- Our first form asking for name and email -->
-    <form
-    ng-if="formNum == 2">
-
-        <!-- Form Title -->
-        <h3 class = "formTitle">
-            Thank you for signing in! Would you like to join any of our online organizations?
-        </h3>
-
-        <!-- Check box for automatic org submission -->
-        <ul class = "checkList">
-
-            <li>
-                <md-checkbox ng-model="formData.slack"
-                aria-label="Checkbox 1"
-                class = "orgCheck">
-                   <a href = "https://slack.com/">
-                       Slack
-                   </a>
-                 </md-checkbox>
-            </li>
-
-            <li>
-             <md-checkbox ng-model="formData.github"
-             aria-label="Checkbox 1"
-             class = "orgCheck">
-                <a href = "https://github.com/">
-                    Github
-                </a>
-              </md-checkbox>
-            </li>
-
-         </ul>
-
-          <!-- Button to submit the info -->
-          <div class = "center">
-              <md-button ng-click="submitSignIn(3, '575px')"
-              class="formButton md-raised">
-              Submit
-              </md-button>
-          </div>
-
-    </form>
-
     <!-- A Final Thank you -->
     <div
-    ng-if="formNum == 3">
+    id = "form2"
+    ng-if="formNum == 2">
 
         <h3 class = "formTitle"
         ng-if = "formData.slack ||
